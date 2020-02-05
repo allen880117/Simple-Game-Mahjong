@@ -1,32 +1,38 @@
 import enum
 
-class TileCategories(enum.Enum):
-    # category
-    SUITS  = "suits"
-    HONORS = "honors"
-    BOUNS  = "bonus"
-    
-    # unknown
-    UNKNOWN_CATEGORY = "unknown_category"
 
-class TileTypes(enum.Enum):
+class TileCategories(enum.IntEnum):  # NUMBER: 4
+    # unknown
+    UNKNOWN_CATEGORY = 0
+
+    # category
+    SUITS  = 1
+    HONORS = 2
+    BONUS  = 3
+
+
+class TileTypes(enum.IntEnum):  # NUMBER: 8
+    # unknown
+    UNKNOWN_TYPE = 0
+
     # suit
-    DOTS       = "dots"
-    BAMBOO     = "bamboo"
-    CHARACTERS = "characters"
+    DOTS       = 1
+    BAMBOO     = 2
+    CHARACTERS = 3
 
     # honor
-    WINDS   = "winds"
-    DRAGONS = "dragons"
+    WINDS   = 4
+    DRAGONS = 5
 
     # bonus
-    SEASONS = "seasons"
-    FLOWERS = "flowers"
+    SEASONS = 6
+    FLOWERS = 7
 
+
+class TileSequences(enum.IntEnum):  # NUMBER: 25
     # unknown
-    UNKNOWN_TYPE = "unknown_type"
+    UNKNOWN_SEQUENCE = 0
 
-class TileSequences(enum.Enum):
     # suit
     ONE   = 1
     TWO   = 2
@@ -39,37 +45,45 @@ class TileSequences(enum.Enum):
     NINE  = 9
 
     # honor - wind
-    EAST  = "east"
-    SOUTH = "south"
-    WEST  = "west"
-    NORTH = "north"
+    EAST  = 10
+    SOUTH = 11
+    WEST  = 12
+    NORTH = 13
 
     # honor - dragon
-    RED   = "red"
-    GREEN = "grenn"
-    WHITE = "white"
+    RED   = 14
+    GREEN = 15
+    WHITE = 16
 
     # bonus - season
-    SPRING = "spring"
-    SUMMER = "summer"
-    AUTUMN = "autumn"
-    WINTER = "winter"
+    SPRING = 17
+    SUMMER = 18
+    AUTUMN = 19
+    WINTER = 20
 
     # bonus - flower
-    PLUM          = "plum"
-    ORCHID        = "orchid"
-    CHRYSANTHEMUM = "chrysanthemum"
-    BAMBOO        = "bamboo"
+    PLUM          = 21
+    ORCHID        = 22
+    CHRYSANTHEMUM = 23
+    BAMBOO        = 24
 
-    # unknown
-    UNKNOWN_SEQUENCE = "unknown_sequence"
 
 class TileAttributes:
-    def __init__(self, _category: TileCategories, _type: TileTypes, _seq: TileSequences) :
-        self.category = _category
-        self.type = _type
-        self.sequence = _seq
+    def __init__(self, _category: TileCategories, _type: TileTypes, _seq: TileSequences):
+        self.type = {
+            'category': _category,
+            'type'    : _type,
+            'sequence': _seq
+        }
+
+        self.type_id = self.get_type_id()
+
+    def get_type_id(self) -> int:
+        return                                      \
+            self.type['category'].value * 8  * 25 + \
+            self.type['type'].value     * 25 +      \
+            self.type['sequence'].value
 
 class Tiles:
-    def __init__(self, _attribute: TileAttributes) :
+    def __init__(self, _attribute: TileAttributes):
         self.attribute = _attribute
