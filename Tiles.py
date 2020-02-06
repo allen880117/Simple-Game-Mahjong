@@ -1,5 +1,6 @@
+#!/usr/bin/python3
+#coding=utf-8
 import enum
-
 
 class TileCategories(enum.IntEnum):  # NUMBER: 4
     # unknown
@@ -16,17 +17,17 @@ class TileTypes(enum.IntEnum):  # NUMBER: 8
     UNKNOWN_TYPE = 0
 
     # suit
-    DOTS       = 1
-    BAMBOO     = 2
-    CHARACTERS = 3
+    SUIT_DOTS       = 1
+    SUIT_BAMBOO     = 2
+    SUIT_CHARACTERS = 3
 
     # honor
-    WINDS   = 4
-    DRAGONS = 5
+    HONOR_WINDS   = 4
+    HONOR_DRAGONS = 5
 
     # bonus
-    SEASONS = 6
-    FLOWERS = 7
+    BONUS_SEASONS = 6
+    BONUS_FLOWERS = 7
 
 
 class TileSequences(enum.IntEnum):  # NUMBER: 25
@@ -34,56 +35,60 @@ class TileSequences(enum.IntEnum):  # NUMBER: 25
     UNKNOWN_SEQUENCE = 0
 
     # suit
-    ONE   = 1
-    TWO   = 2
-    THREE = 3
-    FOUR  = 4
-    FIVE  = 5
-    SIX   = 6
-    SEVEN = 7
-    EIGHT = 8
-    NINE  = 9
+    SUIT_ONE   = 1
+    SUIT_TWO   = 2
+    SUIT_THREE = 3
+    SUIT_FOUR  = 4
+    SUIT_FIVE  = 5
+    SUIT_SIX   = 6
+    SUIT_SEVEN = 7
+    SUIT_EIGHT = 8
+    SUIT_NINE  = 9
 
     # honor - wind
-    EAST  = 10
-    SOUTH = 11
-    WEST  = 12
-    NORTH = 13
+    HONOR_EAST  = 10
+    HONOR_SOUTH = 11
+    HONOR_WEST  = 12
+    HONOR_NORTH = 13
 
     # honor - dragon
-    RED   = 14
-    GREEN = 15
-    WHITE = 16
+    HONOR_RED   = 14
+    HONOR_GREEN = 15
+    HONOR_WHITE = 16
 
     # bonus - season
-    SPRING = 17
-    SUMMER = 18
-    AUTUMN = 19
-    WINTER = 20
+    BONUS_SPRING = 17
+    BONUS_SUMMER = 18
+    BONUS_AUTUMN = 19
+    BONUS_WINTER = 20
 
     # bonus - flower
-    PLUM          = 21
-    ORCHID        = 22
-    CHRYSANTHEMUM = 23
-    BAMBOO        = 24
+    BONUS_PLUM          = 21
+    BONUS_ORCHID        = 22
+    BONUS_CHRYSANTHEMUM = 23
+    BONUS_BAMBOO        = 24
 
-
-class TileAttributes:
+class Tiles:
     def __init__(self, _category: TileCategories, _type: TileTypes, _seq: TileSequences):
-        self.type = {
+        self.attribute = {
             'category': _category,
             'type'    : _type,
             'sequence': _seq
         }
 
-        self.type_id = self.get_type_id()
+        self.id = self.get_id()
 
-    def get_type_id(self) -> int:
+    def get_id(self) -> int:
         return                                      \
-            self.type['category'].value * 8  * 25 + \
-            self.type['type'].value     * 25 +      \
-            self.type['sequence'].value
-
-class Tiles:
-    def __init__(self, _attribute: TileAttributes):
-        self.attribute = _attribute
+            self.attribute['category'].value * 8  * 25 + \
+            self.attribute['type'].value     * 25 +      \
+            self.attribute['sequence'].value
+    
+    def get_category(self) -> TileCategories:
+        return self.attribute['category']
+    
+    def get_type(self) -> TileTypes:
+        return self.attribute['type']
+    
+    def get_sequence(self) -> TileSequences:
+        return self.attribute['sequence']
