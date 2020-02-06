@@ -11,4 +11,4 @@ class TileList:
         return self.tiles
 
     def rearrange(self) :
-        self.tiles.sort(key=Tiles.Tiles.get_type_id)
+        self.tiles.sort(key=Tiles.Tiles.get_id)
