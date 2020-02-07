@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 #coding=utf-8
-from Tiles import Tiles
+import Tile as tl
+import TileList as tl_list
 import pygame
 import typing
 
