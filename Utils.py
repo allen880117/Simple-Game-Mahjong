@@ -9,7 +9,7 @@ class TileNameConvertor:
     def __init__(self):
         pass
 
-    def run(self, _tile_list:tl_list.TileList) -> typing.List[str]:
+    def run(self, _tile_list:tl_list.Hand) -> typing.List[str]:
         name_list = []
         
         for tile in _tile_list.get_list():
@@ -95,7 +95,7 @@ class TileNameConvertor:
         return name_list
 
 
-    def output(self, _tile_list: tl_list.TileList) -> None:
+    def output(self, _tile_list: tl_list.Hand) -> None:
         name_list = self.run(_tile_list)
         for name in name_list:
             print(name)

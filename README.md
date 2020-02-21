@@ -18,6 +18,7 @@
 |:-:|:-:|
 |牌|Tile|
 |手牌|Hand|
+|理牌|Sort|
 |胡|Win|
 |數字|Rank|
 |門風（自風）|Dealer's Wind|
